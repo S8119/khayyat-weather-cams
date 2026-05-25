@@ -3,15 +3,13 @@ package khayyat.weathercams.openweathermap.geocoding;
 import com.andrewoid.apikeys.ApiKey;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class GeocodingServiceTest
 {
 
     @Test
-    void getCoordinates() throws IOException
+    void getCoordinates()
     {
         //given
         ApiKey openWeatherMapKey = new ApiKey("openweathermap");
