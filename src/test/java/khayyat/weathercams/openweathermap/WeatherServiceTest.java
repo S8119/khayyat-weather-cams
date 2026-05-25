@@ -47,7 +47,7 @@ class WeatherServiceTest
         Main main = weatherData.main();
         //assertNotNull, not AssertEquals, since result depends on current weather and is not constant.
         assertNotNull(main.temp());
-        assertNotNull(main.feels_like());
+        assertNotNull(main.feelsLike());
 
         Weather weather = weatherData.weather()[0];
         //assertNotNull, not AssertEquals, since result depends on current weather and is not constant.

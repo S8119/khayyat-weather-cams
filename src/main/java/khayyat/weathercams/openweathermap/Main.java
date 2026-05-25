@@ -1,5 +1,7 @@
 package khayyat.weathercams.openweathermap;
 
-public record Main(double temp, double feels_like)
+import com.google.gson.annotations.SerializedName;
+
+public record Main(double temp, @SerializedName("feels_like") double feelsLike)
 {
 }
