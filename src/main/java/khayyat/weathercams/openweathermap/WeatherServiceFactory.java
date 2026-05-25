@@ -1,12 +1,12 @@
-package khayyat.weathercams.openweathermap.geocoding;
+package khayyat.weathercams.openweathermap;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class GeocodingServiceFactory
+public class WeatherServiceFactory
 {
-    public GeocodingService create()
+    public WeatherService create()
     {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.openweathermap.org/")
@@ -16,6 +16,6 @@ public class GeocodingServiceFactory
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build();
 
-        return retrofit.create(GeocodingService.class);
+        return retrofit.create(WeatherService.class);
     }
 }
