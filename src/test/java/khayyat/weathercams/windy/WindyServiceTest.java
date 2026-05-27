@@ -27,7 +27,7 @@ class WindyServiceTest
 
         //then
         Webcams[] webcams = results.webcams();
-        for(Webcams webcam : webcams)
+        for (Webcams webcam : webcams)
         {
             Images image = webcam.images();
             Current current = image.current();
