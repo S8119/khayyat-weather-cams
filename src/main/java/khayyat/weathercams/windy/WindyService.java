@@ -9,6 +9,7 @@ public interface WindyService
 {
     final int LIMIT = 5;
     final String INCLUDE = "categories,images,location";
+
     @GET("webcams/api/v3/webcams?limit=" + LIMIT + "&include=" + INCLUDE)
     Single<Results> getResults(
             @Header("x-windy-api-key") String apikey,
