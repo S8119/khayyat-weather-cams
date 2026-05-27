@@ -7,11 +7,11 @@ import retrofit2.http.Query;
 
 public interface WindyService
 {
-    @GET("webcams/api/v3/webcams")
+    final int LIMIT = 5;
+    final String INCLUDE = "categories,images,location";
+    @GET("webcams/api/v3/webcams?limit=" + LIMIT + "&include=" + INCLUDE)
     Single<Results> getResults(
             @Header("x-windy-api-key") String apikey,
-            @Query("limit") int limit,
-            @Query("nearby") String nearby,
-            @Query("include") String[] include
+            @Query("nearby") String nearby
     );
 }

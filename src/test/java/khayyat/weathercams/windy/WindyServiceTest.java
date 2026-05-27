@@ -19,10 +19,9 @@ class WindyServiceTest
         //when
         String[] include = {"categories", "images", "location"};
 
-        Results results = service.getResults(keyString,
-                5,
-                "40.6966727,-74.3091458,10",
-                include
+        Results results = service.getResults(
+                keyString,
+                "40.6966727,-74.3091458,10"
         ).blockingGet();
 
         //then
