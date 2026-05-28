@@ -48,6 +48,7 @@ jobs:
       - name: Build (and test) with Gradle
         env:
           openweathermap: ${{ secrets.OPEN_WEATHER_MAP_KEY }}
+          windy: ${{ secrets.WINDY_KEY }}
         run: ./gradlew build
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v4
