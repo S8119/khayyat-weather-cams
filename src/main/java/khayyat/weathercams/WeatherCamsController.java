@@ -4,9 +4,11 @@ import com.andrewoid.apikeys.ApiKey;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import khayyat.weathercams.openweathermap.*;
-import khayyat.weathercams.windy.WindyService;
+import khayyat.weathercams.windy.*;
 
 import javax.swing.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class WeatherCamsController
 {
@@ -20,12 +22,15 @@ public class WeatherCamsController
     private final JLabel feelValueLabel;
     private final JLabel descriptionValueLabel;
 
+    private final JLabel[] picLabels;
+
     private double latitude;
     private double longitude;
+    private final int RADIUS = 10;
 
     public WeatherCamsController(WeatherService weatherService, WindyService windyService, JTextField cityField,
                                  JTextField stateField, JLabel temperatureValueLabel, JLabel feelValueLabel,
-                                 JLabel descriptionValueLabel)
+                                 JLabel descriptionValueLabel, JLabel[] picLabels)
     {
         this.weatherService = weatherService;
         this.windyService = windyService;
@@ -34,6 +39,7 @@ public class WeatherCamsController
         this.temperatureValueLabel = temperatureValueLabel;
         this.feelValueLabel = feelValueLabel;
         this.descriptionValueLabel = descriptionValueLabel;
+        this.picLabels = picLabels;
     }
 
     public void doSearch()
@@ -63,6 +69,19 @@ public class WeatherCamsController
                 .subscribe(
                         (this::handleResponse),
                         Throwable::printStackTrace);
+
+        ApiKey windyKey = new ApiKey("windy");
+        String windyKeyString = windyKey.get();
+
+        Disposable disposableWindyResults = windyService.getResults(
+                        windyKeyString, latitude + "," + longitude + "," + RADIUS)
+                // tells Rx to request the data on a background Thread
+                .subscribeOn(Schedulers.io())
+                // tells Rx to handle the response on Swing's main Thread
+                .observeOn(Schedulers.from(SwingUtilities::invokeLater))
+                .subscribe(
+                        (this::handleResponse),
+                        Throwable::printStackTrace);
     }
 
     private void handleResponse(Coordinates[] coordinates)
@@ -79,5 +98,24 @@ public class WeatherCamsController
 
         Weather weather = weatherData.weather()[0];
         descriptionValueLabel.setText(weather.description());
+    }
+
+    private void handleResponse(Results results)
+    {
+        Webcams[] webcams = results.webcams();
+        for (int i = 0; i < webcams.length; i++)
+        {
+                try
+                {
+                    Images images = webcams[i].images();
+                    Current current = images.current();
+                    ImageIcon imageIcon = new ImageIcon(new URL(current.preview()));
+                    picLabels[i].setIcon(imageIcon);
+                }
+                catch (MalformedURLException e)
+                {
+                    e.printStackTrace();
+                }
+        }
     }
 }
