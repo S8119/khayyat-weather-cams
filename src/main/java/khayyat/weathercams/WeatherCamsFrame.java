@@ -67,12 +67,12 @@ public class WeatherCamsFrame extends JFrame
             }
         });
 
-        addJComponent(cityLabel, 0, 0);
-        addJComponent(cityField, 1, 0);
-        addJComponent(stateLabel, 0, 1);
-        addJComponent(stateField, 1, 1);
-        addJComponent(countryLabel, 0, 2);
-        addJComponent(countryField, 1, 2);
+        addComponent(cityLabel, 0, 0);
+        addComponent(cityField, 1, 0);
+        addComponent(stateLabel, 0, 1);
+        addComponent(stateField, 1, 1);
+        addComponent(countryLabel, 0, 2);
+        addComponent(countryField, 1, 2);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -81,12 +81,12 @@ public class WeatherCamsFrame extends JFrame
         constraints.anchor = GridBagConstraints.NORTH;
         add(searchButton, constraints);
 
-        addJComponent(temperatureLabel, 0, 4);
-        addJComponent(temperatureValueLabel, 1, 4);
-        addJComponent(feelLabel, 0, 5);
-        addJComponent(feelValueLabel, 1, 5);
-        addJComponent(descriptionLabel, 0, 6);
-        addJComponent(descriptionValueLabel, 1, 6);
+        addComponent(temperatureLabel, 0, 4);
+        addComponent(temperatureValueLabel, 1, 4);
+        addComponent(feelLabel, 0, 5);
+        addComponent(feelValueLabel, 1, 5);
+        addComponent(descriptionLabel, 0, 6);
+        addComponent(descriptionValueLabel, 1, 6);
         for (int i = 0; i < MAX_NUM_PICS; i++)
         {
             addPicLabel(picLabels[i], 2 + i / 3, (7 * i) % 21);
