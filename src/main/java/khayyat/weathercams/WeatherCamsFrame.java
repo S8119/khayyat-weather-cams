@@ -46,10 +46,10 @@ public class WeatherCamsFrame extends JFrame
         final JLabel descriptionLabel = new JLabel("Description");
         final JLabel descriptionValueLabel = new JLabel("0");
 
-        final int MAX_NUM_PICS = 5;
+        final int maxNumPics = 5;
 
-        final JLabel[] picLabels = new JLabel[MAX_NUM_PICS];
-        for (int i = 0; i < MAX_NUM_PICS; i++)
+        final JLabel[] picLabels = new JLabel[maxNumPics];
+        for (int i = 0; i < maxNumPics; i++)
         {
             picLabels[i] = new JLabel();
         }
@@ -87,7 +87,7 @@ public class WeatherCamsFrame extends JFrame
         addComponent(feelValueLabel, 1, 5);
         addComponent(descriptionLabel, 0, 6);
         addComponent(descriptionValueLabel, 1, 6);
-        for (int i = 0; i < MAX_NUM_PICS; i++)
+        for (int i = 0; i < maxNumPics; i++)
         {
             addPicLabel(picLabels[i], 2 + i / 3, (7 * i) % 21);
         }
