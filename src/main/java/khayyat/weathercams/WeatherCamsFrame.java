@@ -25,13 +25,17 @@ public class WeatherCamsFrame extends JFrame
 
         final String INITIAL_CITY = "New York";
         final String INITIAL_STATE = "NY";
+        final String INITIAL_COUNTRY = "US";
 
         final JLabel cityLabel = new JLabel("City");
         final JTextField cityField = new JTextField(INITIAL_CITY, 10);
 
-        // This application assumes the location is in the United States.
+        // State is ignored unless country is US.
         final JLabel stateLabel = new JLabel("State");
         final JTextField stateField = new JTextField(INITIAL_STATE, 2);
+
+        final JLabel countryLabel = new JLabel("Country");
+        final JTextField countryField = new JTextField(INITIAL_COUNTRY, 10);
 
         final JButton searchButton = new JButton("Search");
 
@@ -51,7 +55,7 @@ public class WeatherCamsFrame extends JFrame
         }
 
         final WeatherCamsController controller = new WeatherCamsController(
-                weatherService, windyService, cityField, stateField,
+                weatherService, windyService, cityField, stateField, countryField,
                 temperatureValueLabel, feelValueLabel, descriptionValueLabel, picLabels);
 
         searchButton.addActionListener(new ActionListener()
@@ -67,23 +71,25 @@ public class WeatherCamsFrame extends JFrame
         addJComponent(cityField, 1, 0);
         addJComponent(stateLabel, 0, 1);
         addJComponent(stateField, 1, 1);
+        addJComponent(countryLabel, 0, 2);
+        addJComponent(countryField, 1, 2);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
-        constraints.gridy = 2;
+        constraints.gridy = 3;
         constraints.gridwidth = 2;
         constraints.anchor = GridBagConstraints.NORTH;
         add(searchButton, constraints);
 
-        addJComponent(temperatureLabel, 0, 3);
-        addJComponent(temperatureValueLabel, 1, 3);
-        addJComponent(feelLabel, 0, 4);
-        addJComponent(feelValueLabel, 1, 4);
-        addJComponent(descriptionLabel, 0, 5);
-        addJComponent(descriptionValueLabel, 1, 5);
+        addJComponent(temperatureLabel, 0, 4);
+        addJComponent(temperatureValueLabel, 1, 4);
+        addJComponent(feelLabel, 0, 5);
+        addJComponent(feelValueLabel, 1, 5);
+        addJComponent(descriptionLabel, 0, 6);
+        addJComponent(descriptionValueLabel, 1, 6);
         for (int i = 0; i < MAX_NUM_PICS; i++)
         {
-            addPicLabel(picLabels[i], 2 + i / 3, (6 * i) % 18);
+            addPicLabel(picLabels[i], 2 + i / 3, (7 * i) % 21);
         }
 
         //Populate frame with initial values
@@ -104,7 +110,7 @@ public class WeatherCamsFrame extends JFrame
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = x;
         constraints.gridy = y;
-        constraints.gridheight = 6;
+        constraints.gridheight = 7;
         constraints.anchor = GridBagConstraints.NORTH;
         add(picLabel, constraints);
     }

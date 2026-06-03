@@ -17,6 +17,7 @@ public class WeatherCamsController
 
     private final JTextField cityField;
     private final JTextField stateField;
+    private final JTextField countryField;
 
     private final JLabel temperatureValueLabel;
     private final JLabel feelValueLabel;
@@ -29,13 +30,14 @@ public class WeatherCamsController
     private final int RADIUS = 10;
 
     public WeatherCamsController(WeatherService weatherService, WindyService windyService, JTextField cityField,
-                                 JTextField stateField, JLabel temperatureValueLabel, JLabel feelValueLabel,
-                                 JLabel descriptionValueLabel, JLabel[] picLabels)
+                                 JTextField stateField, JTextField countryField, JLabel temperatureValueLabel,
+                                 JLabel feelValueLabel, JLabel descriptionValueLabel, JLabel[] picLabels)
     {
         this.weatherService = weatherService;
         this.windyService = windyService;
         this.cityField = cityField;
         this.stateField = stateField;
+        this.countryField = countryField;
         this.temperatureValueLabel = temperatureValueLabel;
         this.feelValueLabel = feelValueLabel;
         this.descriptionValueLabel = descriptionValueLabel;
@@ -45,13 +47,14 @@ public class WeatherCamsController
     public void doSearch()
     {
         String city = cityField.getText();
-        String state = stateField.getText();
+        String country = countryField.getText();
+        String state = country.equals("US") ? stateField.getText() : "";
 
         ApiKey openWeatherMapKey = new ApiKey("openweathermap");
         String openWeatherMapKeyString = openWeatherMapKey.get();
 
         Disposable disposableCoordinates = weatherService.getCoordinates(
-                city + "," + state + ",US", openWeatherMapKeyString)
+                city + "," + state + "," + country, openWeatherMapKeyString)
                 // tells Rx to request the data on a background Thread
                 .subscribeOn(Schedulers.io())
                 // tells Rx to handle the response on Swing's main Thread
