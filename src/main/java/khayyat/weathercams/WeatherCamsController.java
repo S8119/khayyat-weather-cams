@@ -27,7 +27,7 @@ public class WeatherCamsController
 
     private double latitude;
     private double longitude;
-    private final int RADIUS = 10;
+    private final int radius = 10;
 
     public WeatherCamsController(WeatherService weatherService, WindyService windyService, JTextField cityField,
                                  JTextField stateField, JTextField countryField, JLabel temperatureValueLabel,
@@ -77,7 +77,7 @@ public class WeatherCamsController
         String windyKeyString = windyKey.get();
 
         Disposable disposableWindyResults = windyService.getResults(
-                        windyKeyString, latitude + "," + longitude + "," + RADIUS)
+                        windyKeyString, latitude + "," + longitude + "," + radius)
                 // tells Rx to request the data on a background Thread
                 .subscribeOn(Schedulers.io())
                 // tells Rx to handle the response on Swing's main Thread
@@ -114,8 +114,7 @@ public class WeatherCamsController
                     Current current = images.current();
                     ImageIcon imageIcon = new ImageIcon(new URL(current.preview()));
                     picLabels[i].setIcon(imageIcon);
-                }
-                catch (MalformedURLException e)
+                } catch (MalformedURLException e)
                 {
                     e.printStackTrace();
                 }

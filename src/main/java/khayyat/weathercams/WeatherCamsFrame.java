@@ -23,19 +23,19 @@ public class WeatherCamsFrame extends JFrame
         final WeatherService weatherService = new WeatherServiceFactory().create();
         final WindyService windyService = new WindyServiceFactory().create();
 
-        final String INITIAL_CITY = "New York";
-        final String INITIAL_STATE = "NY";
-        final String INITIAL_COUNTRY = "US";
+        final String initialCity = "New York";
+        final String initialState = "NY";
+        final String initialCountry = "US";
 
         final JLabel cityLabel = new JLabel("City");
-        final JTextField cityField = new JTextField(INITIAL_CITY, 10);
+        final JTextField cityField = new JTextField(initialCity, 10);
 
         // State is ignored unless country is US.
         final JLabel stateLabel = new JLabel("State");
-        final JTextField stateField = new JTextField(INITIAL_STATE, 2);
+        final JTextField stateField = new JTextField(initialState, 2);
 
         final JLabel countryLabel = new JLabel("Country");
-        final JTextField countryField = new JTextField(INITIAL_COUNTRY, 10);
+        final JTextField countryField = new JTextField(initialCountry, 10);
 
         final JButton searchButton = new JButton("Search");
 
@@ -96,7 +96,7 @@ public class WeatherCamsFrame extends JFrame
         controller.doSearch();
     }
 
-    private void addJComponent(JComponent component, int x, int y)
+    private void addComponent(JComponent component, int x, int y)
     {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = x;
