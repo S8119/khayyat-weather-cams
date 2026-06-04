@@ -25,8 +25,6 @@ public class WeatherCamsController
 
     private final JLabel[] picLabels;
 
-    private double latitude;
-    private double longitude;
     private final int radius = 10;
 
     public WeatherCamsController(WeatherService weatherService, WindyService windyService, JTextField cityField,
@@ -62,9 +60,18 @@ public class WeatherCamsController
                 .subscribe(
                         (this::handleResponse),
                         Throwable::printStackTrace);
+    }
+
+    private void handleResponse(Coordinates[] coordinates)
+    {
+        double latitude = coordinates[0].lat();
+        double longitude = coordinates[0].lon();
+
+        ApiKey openWeatherMapKey = new ApiKey("openweathermap");
+        String openWeatherMapKeyString = openWeatherMapKey.get();
 
         Disposable disposableWeatherData = weatherService.getWeatherData(
-                "imperial", latitude, longitude, openWeatherMapKeyString)
+                        "imperial", latitude, longitude, openWeatherMapKeyString)
                 // tells Rx to request the data on a background Thread
                 .subscribeOn(Schedulers.io())
                 // tells Rx to handle the response on Swing's main Thread
@@ -85,12 +92,6 @@ public class WeatherCamsController
                 .subscribe(
                         (this::handleResponse),
                         Throwable::printStackTrace);
-    }
-
-    private void handleResponse(Coordinates[] coordinates)
-    {
-        latitude = coordinates[0].lat();
-        longitude = coordinates[0].lon();
     }
 
     private void handleResponse(WeatherData weatherData)
