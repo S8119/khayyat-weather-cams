@@ -17,8 +17,6 @@ class WindyServiceTest
         WindyService service = new WindyServiceFactory().create();
 
         //when
-        String[] include = {"categories", "images", "location"};
-
         Results results = service.getResults(
                 keyString,
                 "40.6966727,-74.3091458,10"
